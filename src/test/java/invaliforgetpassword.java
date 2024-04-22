@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class forget {
+public class invaliforgetpassword {
     public static void main(String[] args) throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
@@ -50,6 +50,7 @@ public class forget {
         Thread.sleep(2000);
         // Récupérez le texte à partir de l'élément
         String confirmationText = confirmationElement.getText();
+        Thread.sleep(1000);
         // Use regular expression to find 6-digit code in the text
         Pattern pattern = Pattern.compile("\\b\\d{6}\\b");
         Matcher matcher = pattern.matcher(confirmationText);
@@ -61,31 +62,32 @@ public class forget {
             System.out.println("Aucun code de confirmation trouvé.");
         }
         if (confirmationCode != null) {
-        // Switch back to the original window
-        driver.switchTo().window(driver.getWindowHandles().iterator().next());
-        // Copy confirmation code to clipboard
-        WebElement confirmationInput = driver.findElement(By.xpath("(//input[@id=':r3:'])[1]"));
-        confirmationInput.sendKeys(confirmationCode);
-        //confirmationInput.click();
-        Thread.sleep(1000);
-        WebElement motdepasse = driver.findElement(By.xpath("(//input[@id=':r9:'])[1]"));
-        motdepasse.sendKeys("123456Aa@");
-        WebElement confirmmotdepasse = driver.findElement(By.xpath("//input[@id=':ra:']"));
-        confirmmotdepasse.sendKeys("123456Aa@");
-        WebElement ok = driver.findElement(By.xpath("//button[@id=':rb:']"));
-        ok.click();
+            // Switch back to the original window
+            driver.switchTo().window(driver.getWindowHandles().iterator().next());
+            // Copy confirmation code to clipboard
+            WebElement confirmationInput = driver.findElement(By.xpath("(//input[@id=':r3:'])[1]"));
+            confirmationInput.sendKeys(confirmationCode);
+            //confirmationInput.click();
+            Thread.sleep(1000);
+            WebElement motdepasse = driver.findElement(By.xpath("(//input[@id=':r9:'])[1]"));
+            motdepasse.sendKeys("123456Aa@");
+            WebElement confirmmotdepasse = driver.findElement(By.xpath("//input[@id=':ra:']"));
+            confirmmotdepasse.sendKeys("123456Aa@");
+            WebElement ok = driver.findElement(By.xpath("//button[@id=':rb:']"));
+            ok.click();
             try {
-            System.out.println("Réinitialisation du mot de passe réussie !");
-        } catch (Exception e) {
-            // If any exception occurs, print a failure message
-            System.out.println("Échec de la réinitialisation du mot de passe : " + e.getMessage());
-        } finally {
-                Thread.sleep(5000);
-            // Close the browser regardless of success or failure
-            driver.quit();
+                System.out.println("Réinitialisation du mot de passe réussie !");
+            } catch (Exception e) {
+                // If any exception occurs, print a failure message
+                System.out.println("Échec de la réinitialisation du mot de passe : " + e.getMessage());
+            } finally {
+                Thread.sleep(3000);
+                // Close the browser regardless of success or failure
+                driver.quit();
+            }
+        }
     }
 }
-    }
-}
+
 
 
